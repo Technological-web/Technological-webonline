@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros - TeCHNOLOGI SGhc</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            background: #f5f5f5;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Fuente personalizada */
+        @font-face {
+            font-family: 'AVP';
+            src: url('FUENTES/AVP.ttf') format('truetype');
+        }
+
+        /* Header */
+        header {
+            background: rgba(34,34,34,0.95);
+            padding: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 1100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        header img {
+            max-height: 45px;
+        }
+        .logo-text {
+            font-family: 'AVP', sans-serif;
+            color: #E0FFFF;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-left: 15px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #FF8000, 0 0 20px #00FFFF;
+        }
+
+        /* Menú */
+        .menu-container {
+            position: relative;
+            display: inline-block;
+        }
+        .menu-btn {
+            background: none;
+            border: none;
+            color: #E0FFFF;
+            font-size: 1.6rem;
+            cursor: pointer;
+            outline: none;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            background: rgba(18,18,18,0.98);
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+            padding: 8px;
+            min-width: 240px;
+        }
+        .dropdown-menu.active { display: block; }
+
+        .dropdown-item {
+            color: #E0FFFF;
+            padding: 8px 10px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+        }
+        .dropdown-item:hover { background: rgba(255,255,255,0.05); }
+
+        .submenu {
+            display: none;
+            margin: 6px 0 10px 10px;
+            border-left: 2px solid rgba(0,255,255,0.18);
+            padding-left: 10px;
+        }
+        .submenu.active { display: block; }
+        .submenu a {
+            display: block;
+            color: #E0FFFF;
+            text-decoration: none;
+            padding: 4px 0;
+        }
+        .submenu a:hover { color: #00FFFF; }
+
+        /* Sección principal */
+        .about-section {
+            max-width: 1000px;
+            margin: 60px auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.1);
+        }
+
+        .about-section h2 {
+            font-family: 'AVP', sans-serif;
+            font-size: 1.8rem;
+            color: #ff6815;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            text-shadow: 0 0 8px rgba(255,104,21,0.5);
+        }
+
+        .about-section p {
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .about-divider {
+            border: 0;
+            height: 2px;
+            background: linear-gradient(to right, #ff6815, #00ffff);
+            width: 80px;
+            margin: 25px 0;
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: #fff;
+            padding: 25px 0;
+            margin-top: 50px;
+        }
+        footer .list-unstyled a {
+            color: #fff;
+            text-decoration: none;
+        }
+        footer .list-unstyled a:hover {
+            color: #ff6815;
+            text-decoration: underline;
+        }
+        footer .fab {
+            font-size: 1.3rem;
+            margin: 0 10px;
+        }
+        footer a.fab:hover { color: #ff6815; }
+
+        @media (max-width: 576px) {
+            .logo-text { font-size: 1.5rem; }
+            .about-section { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="d-flex justify-content-between align-items-center container-fluid">
+        <div class="d-flex align-items-center">
+			<a href="index.html" class="d-flex align-items-center text-decoration-none">
+          <img src="IMAGENES/LOGO-EMPRESA.png" alt="Logo">
+            <span class="logo-text">TeCHNOLOGI SGhc</span>
+       </a>
+				</div>
+			
+        <div class="menu-container">
+    <button class="menu-btn" id="backButton">← Volver</button>
+</div>
+
+    </header>
+
+    <section class="about-section">
+        <h2>Quienes Somos</h2>
+        <hr class="about-divider">
+        <p>En TECNOLOGY RGHC S.A.C, somos tu fuente confiable de información actualizada sobre el mundo de la tecnología. Nuestro objetivo es ayudarte a tomar decisiones informadas y seguras al comprar tus dispositivos tecnológicos. Desde comparaciones detalladas hasta análisis en profundidad, ofrecemos una amplia gama de recursos diseñados para proporcionarte la mejor información sobre  laptops, impresoras y todo lo relacionado con la tecnología.</p>
+
+        <h2>mision</h2>
+        <hr class="about-divider">
+        <p>Technology RGHC S.A.C. es una empresa dedicada a la distribución y
+comercialización de laptops y accesorios tecnológicos de la mejor calidad en el
+Perú, así como al desarrollo de software a la medida. Nuestra misión es seguir
+liderando el mercado, otorgando el mayor grado de satisfacción a nuestros
+clientes a través de una asesoría especializada y cercana, ofreciendo la más
+amplia variedad de laptops y herramientas de última generación con los precios
+más competitivos del mercado, además de brindar soporte técnico especializado
+que permita soluciones eficientes para su trabajo.
+</p>
+
+        <h2>Vision</h2>
+        <hr class="about-divider">
+        <p>Technology RGHC S.A.C. busca contar con la mayor variedad de laptops y
+accesorios tecnológicos, poniendo a disposición lo último de la tecnología a un
+precio justo y con la mejor garantía del mercado. Nuestra visión se renueva con la
+experiencia adquirida para seguir apostando por los adelantos tecnológicos,
+comercializando lo mejor en toda nuestra línea de productos y desarrollando
+sistemas de facturación computarizados. Estamos comprometidos en brindar
+soporte técnico eficiente y especializado, maximizando el valor de la tecnología
+para todos nuestros clientes a nivel nacional
+</p>
+    </section>
+
+    <footer class="container-fluid">
+        <div class="container">
+            <div class="row text-left">
+                <div class="col-md-4 mb-3">
+                    <h5 class="text-white mb-3">SOBRE NOSOTROS</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="nosotros.html" class="text-white">Nuestra Historia</a></li>
+                        <li><a href="nosotros.html" class="text-white">Misión y Visión</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <h5 class="text-white mb-3">CORREOS</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="mailto:ventas@tienda.com" class="text-white">Ventas: ventas@tienda.com</a></li>
+                        <li><a href="mailto:soporte@tienda.com" class="text-white">Soporte: soporte@tienda.com</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <h5 class="text-white mb-3">CONTACTO</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="tel:+51987654321" class="text-white">+51 987 654 321</a></li>
+                        <li><a href="tel:+51912345678" class="text-white">+51 912 345 678</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="bg-light my-3">
+
+            <div class="text-center">
+                <p class="mb-2 text-secondary">© 2025 TeCHNOLOGI SGhc. Todos los derechos reservados.</p>
+                <p class="mb-0">
+                    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
+                </p>
+            </div>
+      </div>
+    </footer>
+
+<script>
+        const backButton = document.getElementById('backButton');
+backButton.addEventListener('click', () => {
+    history.back();
+});
+
+    </script>
+
+</body>
+</html>

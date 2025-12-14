@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptops - TeCHNOLOGI SGhc</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body { background: #f5f5f5; font-family: 'Montserrat', sans-serif; }
+        header { background: rgba(34,34,34,0.95); padding: 10px; position: sticky; top: 0; z-index: 1100; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+        header img { max-height: 45px; }
+        header .form-control { border-radius: 25px; }
+        header .btn { border-radius: 25px; }
+        @font-face { font-family: 'AVP'; src: url('FUENTES/AVP.ttf') format('truetype'); }
+        .logo-text { font-family: 'AVP', sans-serif; color: #E0FFFF; font-size: 2rem; font-weight: bold; margin-left: 15px; letter-spacing: 2px; text-shadow: 0 0 10px #FF8000, 0 0 20px #00FFFF; }
+        .menu-container { position: relative; display: inline-block; margin-left: 8px; }
+        .menu-btn { background: none; border: none; color: #E0FFFF; font-size: 1.6rem; cursor: pointer; outline: none; padding: 6px 8px; border-radius: 6px; transition: background .15s; }
+        .menu-btn:hover { background: rgba(255,255,255,0.03); }
+        .dropdown-menu { display: none; position: absolute; top: calc(100% + 8px); left: 0; background: rgba(18,18,18,0.98); border-radius: 8px; box-shadow: 0 6px 18px rgba(0,0,0,0.4); padding: 8px; min-width: 240px; z-index: 1500; }
+        .dropdown-menu.active { display: block; }
+        .dropdown-item { color: #E0FFFF; padding: 8px 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border-radius: 6px; }
+        .dropdown-item:hover { background: rgba(255,255,255,0.5); }
+        .submenu { display: none; margin: 6px 0 10px 6px; border-left: 2px solid rgba(0,255,255,0.18); padding-left: 10px; }
+        .submenu.active { display: block; }
+        .submenu a { display: block; color: #E0FFFF; text-decoration: none; padding: 6px 0; font-size: 0.94rem; }
+        .submenu a:hover { text-decoration: underline; color: #E0FFFF; }
+        .toggle-submenu { color: #E0FFFF; font-size: 1.05rem; text-decoration: none; border: none; background: transparent; cursor: pointer; padding: 0; line-height: 1; }
+        .filter-sidebar { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .filter-sidebar h2 { font-weight: 700; font-size: 1.6rem; margin-bottom: 15px; }
+        .filter-actions .btn { border-radius: 8px; font-weight: 600; padding: 8px 15px; margin: 0 5px; }
+        .btn-limpiar { background: #222; color: #fff; }
+        .btn-filtrar { background: #ff6815; color: #fff; }
+        .filter-group { margin-bottom: 25px; padding-top: 15px; border-top: 1px solid #eee; }
+        .filter-checkbox-list { max-height: 200px; overflow-y: auto; border: 1px solid #ddd; border-radius: 6px; padding: 5px 10px; }
+        .filter-checkbox-list label { display: block; padding: 8px 0; cursor: pointer; border-bottom: 1px solid #eee; }
+        .filter-checkbox-list label:last-child { border-bottom: none; }
+        .filter-checkbox-list input[type="checkbox"] { margin-right: 10px; accent-color: #ff6815; }
+        .product-img { width: 100%; height: 220px; object-fit: contain; padding: 10px; background: #fff; border-radius: 8px; }
+        .price { font-weight: bold; color: #28a745; }
+        .card { border: none; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 8px rgba(0,0,0,0.15); transition: transform .2s, box-shadow .2s; height: 100%; display: flex; flex-direction: column; }
+        .card:hover { transform: scale(1.04); box-shadow: 0 5px 15px rgba(0,0,0,0.25); }
+        .card-body { flex-grow: 1; justify-content: space-between; display: flex; flex-direction: column; }
+        .btn-primary { background: #ff6815; border: none; border-radius: 20px; padding: 6px 15px; transition: background .3s; margin-top: 10px; }
+        .btn-primary:hover { background: #e05510; }
+        footer { background: #222; color: #fff; padding: 25px 0; margin-top: 50px; }
+        footer a { color: #ff6815; text-decoration: none; transition: color .3s; }
+        footer .list-unstyled a { color: #fff; }
+        footer .list-unstyled a:hover { color: #ff6815 !important; text-decoration: underline; }
+        footer .fab { font-size: 1.3rem; margin: 0 10px; color: #fff; }
+        footer a.fab:hover { color: #ff6815; }
+        @media (max-width: 992px) { header .w-50 { width: 100% !important; margin-top: 10px; } }
+    </style>
+</head>
+<body>
+
+    <header class="d-flex justify-content-between align-items-center container-fluid">
+        <a href="index.html" class="d-flex align-items-center text-decoration-none">
+            <img src="IMAGENES/LOGO-EMPRESA.png" alt="Logo encabezado">
+            <span class="logo-text">TeCHNOLOGI SGhc</span>
+        </a>
+        <div class="d-flex align-items-center w-50">
+            <div class="menu-container mr-2">
+                <button class="menu-btn" id="menuToggle" aria-expanded="false" aria-label="Abrir menú"><strong><em>☰</em></strong></button>
+
+                <div class="dropdown-menu" id="dropdownMenu" role="menu" aria-hidden="true">
+					  <a class="dropdown-item" href="index.html">Inicio</a>
+                    <div class="dropdown-item">
+                        Productos
+                        <button class="toggle-submenu" aria-expanded="false">+</button>
+                    </div>
+                    <div class="submenu">
+                        <a href="ofertas.html">Ofertas</a>
+                        <a href="laptos.html">Equipos</a>
+                        <a href="accesorios.html">Accesorios</a>
+                    </div>
+
+                    <div class="dropdown-item">
+                        Información de la empresa
+                        <button class="toggle-submenu" aria-expanded="false">+</button>
+                    </div>
+                    <div class="submenu">
+                        <a href="nosotros.html">Sobre Nosotros</a>
+                        <a href="nosotros.html">Misión y Visión</a>
+                       
+                  </div>
+
+                    <div class="dropdown-item">
+                        Métodos de contacto
+                        <button class="toggle-submenu" aria-expanded="false">+</button>
+                    </div>
+                    <div class="submenu">
+                        <a href="contactos.html">Dirección</a>
+                        <a href="contactos.html">Correo para contactos</a>
+                        <a href="contactos.html">Números de contacto</a>
+                    </div>
+                </div>
+            </div>
+            <form class="form-inline w-100 mr-2 mb-0" onsubmit="handleSearch(event)">
+                <input class="form-control w-100" type="search" id="searchInput" placeholder="Busca laptops, accesorios y más...">
+                <button type="submit" style="display: none;" aria-label="Buscar"></button>
+            </form>
+        </div>
+        <div class="d-flex align-items-center">
+            <a href="carrito.html" class="btn btn-warning" id="cartBtn">Carrito (0)</a>
+        </div>
+    </header>
+    <div class="container my-4">
+        <div class="container categories text-center mb-5">
+            <a href="#" class="btn btn-dark">Laptops</a>
+            <a href="accesorios.html" class="btn btn-secondary">Accesorios</a>
+            <a href="impresoras.html" class="btn btn-secondary">Impresoras</a>
+            <a href="perifericos.html" class="btn btn-secondary">Periféricos</a>
+            <a href="ofertas.html" class="btn btn-danger">Ofertas</a>
+        </div>
+    </div>
+    <div class="container main-content">
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="filter-sidebar">
+                    <h2>Filtros</h2>
+                    <div class="filter-actions d-flex justify-content-between mb-4">
+                        <button class="btn btn-limpiar"><i class="fas fa-redo-alt mr-1"></i> Limpiar</button>
+                        <button class="btn btn-filtrar" id="filterButton"><i class="fas fa-filter mr-1"></i> Filtrar</button>
+                    </div>
+                    <div class="filter-group">
+                        <label class="font-weight-bold">Marca</label>
+                        <div class="filter-checkbox-list" id="brandFilterList">
+                            <label><input type="checkbox" name="marca" value="acer"> ACER</label>
+                            <label><input type="checkbox" name="marca" value="asus"> ASUS</label>
+                            <label><input type="checkbox" name="marca" value="hp"> HP</label>
+                            <label><input type="checkbox" name="marca" value="lenovo"> LENOVO</label>
+                            <label><input type="checkbox" name="marca" value="msi"> MSI</label>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label class="font-weight-bold mb-0">Tipo de Uso</label>
+                        <div class="filter-checkbox-list" id="usageFilterList">
+                            <label><input type="checkbox" name="uso" value="gaming"> Gaming</label>
+                            <label><input type="checkbox" name="uso" value="profesional"> Profesional / Diseño</label>
+                            <label><input type="checkbox" name="uso" value="estudio"> Estudio / Básico</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h1 class="mb-4" id="product-title">Laptops</h1>
+                <div class="row" id="productList">
+                    </div>
+            </div>
+        </div>
+    </div>
+    <footer class="container-fluid">
+        </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+
+           const allProducts = [
+    // ACER
+    { id: 101, nombre: 'Laptop ACER NITRO V15 (i7)', precio: 5329, imagen: 'IMAGENES/Laptops/ACER/ACER 4.jpg', marca: 'acer', uso: 'gaming' },
+    { id: 102, nombre: 'Laptop ACER SWIFT 3 (i5)', precio: 3150, imagen: 'IMAGENES/Laptops/ACER/ACER 1.jpg', marca: 'acer', uso: 'profesional' },
+    { id: 103, nombre: 'Laptop ACER PREDATOR (i9)', precio: 8990, imagen: 'IMAGENES/Laptops/ACER/ACER 2.jpg', marca: 'acer', uso: 'gaming' },
+    { id: 104, nombre: 'Laptop ACER ASPIRE 5 (i3)', precio: 1950, imagen: 'IMAGENES/Laptops/ACER/ACER 3.jpg', marca: 'acer', uso: 'estudio' },
+    { id: 105, nombre: 'Laptop ACER NITRO 5 (Ryzen)', precio: 4899, imagen: 'IMAGENES/Laptops/ACER/ACER 5.jpg', marca: 'acer', uso: 'gaming' },
+
+    // ASUS
+    { id: 201, nombre: 'Laptop ASUS ROG STRIX', precio: 5329, imagen: 'IMAGENES/Laptops/ASUS/ASUS 30.jpg', marca: 'asus', uso: 'gaming' },
+    { id: 202, nombre: 'Laptop ASUS ZENBOOK Pro', precio: 7100, imagen: 'IMAGENES/Laptops/ASUS/ASUS 17.jpg', marca: 'asus', uso: 'profesional' },
+    { id: 203, nombre: 'Laptop ASUS TUF Gaming', precio: 4199, imagen: 'IMAGENES/Laptops/ASUS/ASUS 15.jpg', marca: 'asus', uso: 'gaming' },
+    { id: 204, nombre: 'Laptop ASUS VIVOBOOK 14', precio: 2450, imagen: 'IMAGENES/Laptops/ASUS/ASUS 16.jpg', marca: 'asus', uso: 'estudio' },
+    { id: 205, nombre: 'Laptop ASUS CHROMEBOOK', precio: 1200, imagen: 'IMAGENES/Laptops/ASUS/ASUS 20.jpg', marca: 'asus', uso: 'estudio' },
+
+    // HP
+    { id: 401, nombre: 'Laptop HP PAVILION 15 (Ryzen)', precio: 2800, imagen: 'IMAGENES/Laptops/HP/HP 31.jpg', marca: 'hp', uso: 'profesional' },
+    { id: 402, nombre: 'Laptop HP SPECTRE x360', precio: 7990, imagen: 'IMAGENES/Laptops/HP/HP 32.jpg', marca: 'hp', uso: 'profesional' },
+    { id: 403, nombre: 'Laptop HP OMEN 16 Gaming', precio: 6150, imagen: 'IMAGENES/Laptops/HP/HP 33.jpg', marca: 'hp', uso: 'gaming' },
+    { id: 404, nombre: 'Laptop HP 14 (Core i3)', precio: 1890, imagen: 'IMAGENES/Laptops/HP/HP 34.jpg', marca: 'hp', uso: 'estudio' },
+    { id: 405, nombre: 'Laptop HP Victus 15', precio: 4500, imagen: 'IMAGENES/Laptops/HP/HP 35.jpg', marca: 'hp', uso: 'gaming' },
+
+    // LENOVO
+    { id: 501, nombre: 'Laptop LENOVO Legion 5', precio: 5800, imagen: 'IMAGENES/Laptops/LENOVO/LENOVO 41.jpg', marca: 'lenovo', uso: 'gaming' },
+    { id: 502, nombre: 'Laptop LENOVO ThinkPad E14', precio: 4100, imagen: 'IMAGENES/Laptops/LENOVO/LENOVO 42.jpg', marca: 'lenovo', uso: 'profesional' },
+    { id: 503, nombre: 'Laptop LENOVO IdeaPad 3', precio: 1990, imagen: 'IMAGENES/Laptops/LENOVO/LENOVO 43.jpg', marca: 'lenovo', uso: 'estudio' },
+    { id: 504, nombre: 'Laptop LENOVO Yoga 7i', precio: 5250, imagen: 'IMAGENES/Laptops/LENOVO/LENOVO 44.jpg', marca: 'lenovo', uso: 'profesional' },
+    { id: 505, nombre: 'Laptop LENOVO Legion 7 Pro', precio: 9200, imagen: 'IMAGENES/Laptops/LENOVO/LENOVO 45.jpg', marca: 'lenovo', uso: 'gaming' },
+
+    // MSI
+    { id: 601, nombre: 'Laptop MSI Katana GF66', precio: 5150, imagen: 'IMAGENES/Laptops/MSI/MSI 58.jpg', marca: 'msi', uso: 'gaming' },
+    { id: 602, nombre: 'Laptop MSI Creator M16', precio: 7500, imagen: 'IMAGENES/Laptops/MSI/MSI 54.jpg', marca: 'msi', uso: 'profesional' },
+    { id: 603, nombre: 'Laptop MSI Pulse GL66', precio: 6300, imagen: 'IMAGENES/Laptops/MSI/MSI 55.jpg', marca: 'msi', uso: 'gaming' },
+    { id: 604, nombre: 'Laptop MSI Thin GF63', precio: 3900, imagen: 'IMAGENES/Laptops/MSI/MSI 56.jpg', marca: 'msi', uso: 'gaming' },
+    { id: 605, nombre: 'Laptop MSI Modern 14', precio: 2950, imagen: 'IMAGENES/Laptops/MSI/MSI 57.jpg', marca: 'msi', uso: 'estudio' }
+];
+            const menuToggle = document.getElementById('menuToggle');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            const submenuToggles = document.querySelectorAll('.toggle-submenu');
+            const menuContainer = document.querySelector('.menu-container');
+            menuToggle.addEventListener('click', (e) => { e.stopPropagation(); dropdownMenu.classList.toggle('active'); });
+            submenuToggles.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const submenu = btn.parentElement.nextElementSibling;
+                    submenu.classList.toggle('active');
+                });
+            });
+            document.addEventListener('click', (e) => { if (!menuContainer.contains(e.target)) { dropdownMenu.classList.remove('active'); } });
+
+            const productListContainer = document.getElementById('productList');
+            const productTitle = document.getElementById('product-title');
+            function renderProducts(productsToRender) {
+                productListContainer.innerHTML = '';
+                if (productsToRender.length === 0) {
+                    productListContainer.innerHTML = '<p class="col-12">No se encontraron productos con estos filtros.</p>';
+                } else {
+                    productsToRender.forEach(product => {
+                        const productCardHTML = `
+                            <div class="col-lg-4 col-md-6 mb-4 product-card">
+                                <div class="card p-2">
+                                    <img src="${product.imagen}" class="card-img-top product-img" alt="${product.nombre}">
+                                    <div class="card-body text-center">
+                                        <p class="card-text">${product.nombre}</p>
+                                        <p class="price">S/ ${product.precio.toLocaleString('es-PE')}</p>
+                                        <button class="btn btn-sm btn-primary add-to-cart-btn" data-id="${product.id}">
+                                            Agregar al carrito
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>`;
+                        productListContainer.innerHTML += productCardHTML;
+                    });
+                }
+                productTitle.textContent = `Laptops (${productsToRender.length} Productos)`;
+                addEventListenersToCartButtons();
+            }
+
+            const filterBtn = document.getElementById('filterButton');
+            const clearBtn = document.querySelector('.btn-limpiar');
+            const brandCheckboxes = document.querySelectorAll('#brandFilterList input[type="checkbox"]');
+            const usageCheckboxes = document.querySelectorAll('#usageFilterList input[type="checkbox"]');
+            const applyFilters = () => {
+                const selectedBrands = Array.from(brandCheckboxes).filter(c => c.checked).map(c => c.value);
+                const selectedUsages = Array.from(usageCheckboxes).filter(c => c.checked).map(c => c.value);
+                let filteredProducts = allProducts.filter(product => {
+                    const brandMatch = selectedBrands.length === 0 || selectedBrands.includes(product.marca);
+                    const usageMatch = selectedUsages.length === 0 || selectedUsages.includes(product.uso);
+                    return brandMatch && usageMatch;
+                });
+                renderProducts(filteredProducts);
+            };
+            const clearFilters = () => {
+                brandCheckboxes.forEach(c => c.checked = false);
+                usageCheckboxes.forEach(c => c.checked = false);
+                renderProducts(allProducts);
+            };
+            filterBtn.addEventListener('click', applyFilters);
+            clearBtn.addEventListener('click', clearFilters);
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartBtn = document.getElementById('cartBtn');
+            function updateCartCount() {
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartBtn.textContent = `Carrito (${totalItems})`;
+            }
+            function addToCart(productId) {
+                const productToAdd = allProducts.find(p => p.id === productId);
+                if (!productToAdd) return;
+                const existingProduct = cart.find(item => item.id === productToAdd.id);
+                if (existingProduct) {
+                    existingProduct.quantity++;
+                } else {
+                    cart.push({ ...productToAdd, quantity: 1 });
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                alert(`✅ "${productToAdd.nombre}" fue agregado al carrito.`);
+            }
+            function addEventListenersToCartButtons() {
+                document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                    if (button.dataset.listenerAttached) return;
+                    button.addEventListener('click', () => {
+                        const productId = parseInt(button.dataset.id);
+                        addToCart(productId);
+                    });
+                    button.dataset.listenerAttached = 'true';
+                });
+            }
+
+            renderProducts(allProducts);
+            updateCartCount();
+        });
+
+        function handleSearch(event) {
+            event.preventDefault();
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                window.location.href = `resultados.html?q=${encodeURIComponent(query)}`;
+            } else {
+                alert("Por favor, ingresa un término de búsqueda.");
+            }
+        }
+    </script>
+</body>
+</html>

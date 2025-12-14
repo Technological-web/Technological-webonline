@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Carrito - TeCHNOLOGI SGhc</title>
+
+    <!-- Fuentes y Estilos -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body { 
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        h2 {
+            font-weight: 700;
+            color: #343a40;
+        }
+
+        .cart-item {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .cart-item:hover {
+            transform: scale(1.01);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .cart-item img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+        .item-details { flex-grow: 1; }
+        .item-details h5 { margin-bottom: 5px; font-weight: bold; }
+        .item-details p { margin-bottom: 4px; color: #555; }
+
+        .item-price { font-weight: 600; color: #28a745; }
+        .item-total { font-weight: 600; color: #007bff; }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .quantity-controls button {
+            border: none;
+            background: #007bff;
+            color: white;
+            width: 26px;
+            height: 26px;
+            border-radius: 4px;
+            line-height: 1;
+            font-size: 0.9rem;
+        }
+
+        .quantity-controls button:hover {
+            background: #0056b3;
+        }
+
+        .total-summary {
+            border-top: 2px solid #333;
+            padding-top: 15px;
+            margin-top: 30px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .empty-cart {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            padding: 50px 0;
+        }
+
+        .btn-remove { 
+            margin-left: 10px;
+            background: #dc3545;
+            border: none;
+        }
+
+        .btn-remove:hover {
+            background: #b02a37;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container my-5">
+        <h2 class="mb-4 text-center">🛒 Tu Carrito de Compras</h2>
+        
+        <div id="cartItemsContainer">
+            <p id="emptyCartMessage" class="empty-cart" style="display: none;">
+                Tu carrito está vacío. <br>
+                <a href="index.html" class="btn btn-primary mt-3">Volver a la tienda</a>
+            </p>
+        </div>
+
+        <div class="total-summary text-right" id="cartTotal">
+            Total: S/ 0.00
+        </div>
+        
+        <div class="text-right mt-4">
+            <a href="index.html" class="btn btn-secondary mr-2">
+                <i class="fas fa-arrow-left"></i> Seguir Comprando
+            </a>
+            <button id="checkoutBtn" class="btn btn-success" disabled>
+                <i class="fas fa-credit-card"></i> Finalizar Compra
+            </button>
+        </div>
+    </div>
+
+    <footer>© 2025 TeCHNOLOGI SGhc — Todos los derechos reservados.</footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartItemsContainer = document.getElementById('cartItemsContainer');
+            const cartTotalElement = document.getElementById('cartTotal');
+            const emptyCartMessage = document.getElementById('emptyCartMessage');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            // Carga el carrito desde localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Función para renderizar el carrito
+            function renderCart() {
+                cartItemsContainer.innerHTML = '';
+                let total = 0;
+
+                if (cart.length === 0) {
+                    emptyCartMessage.style.display = 'block';
+                    cartTotalElement.textContent = 'Total: S/ 0.00';
+                    checkoutBtn.disabled = true;
+                    return;
+                }
+
+                emptyCartMessage.style.display = 'none';
+                checkoutBtn.disabled = false;
+
+                cart.forEach((item, index) => {
+                    const itemTotal = (item.precioOferta || item.precio) * item.quantity;
+
+                    total += itemTotal;
+
+                    const cartItemDiv = document.createElement('div');
+                    cartItemDiv.classList.add('cart-item');
+                    
+                    cartItemDiv.innerHTML = `
+                        <img src="${item.imagen}" alt="${item.nombre}">
+                        <div class="item-details">
+                            <h5>${item.nombre}</h5>
+                            <p>Precio Unitario: <span class="item-price">S/ ${item.precioOferta ? item.precioOferta.toFixed(2) : item.precio.toFixed(2)}</span></p>
+
+                            <div class="quantity-controls">
+                                <button class="decrease" data-index="${index}">-</button>
+                                <span><strong>${item.quantity}</strong></span>
+                                <button class="increase" data-index="${index}">+</button>
+                            </div>
+                            <p>Subtotal: <span class="item-total">S/ ${itemTotal.toFixed(2)}</span></p>
+                        </div>
+                        <button class="btn btn-danger btn-sm btn-remove" data-index="${index}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    `;
+
+                    cartItemsContainer.appendChild(cartItemDiv);
+                });
+
+                cartTotalElement.textContent = `Total: S/ ${total.toFixed(2)}`;
+
+                // Eventos
+                document.querySelectorAll('.btn-remove').forEach(btn => {
+                    btn.addEventListener('click', e => {
+                        removeItem(e.target.closest('button').getAttribute('data-index'));
+                    });
+                });
+
+                document.querySelectorAll('.increase').forEach(btn => {
+                    btn.addEventListener('click', e => {
+                        const i = e.target.getAttribute('data-index');
+                        cart[i].quantity++;
+                        saveAndRender();
+                    });
+                });
+
+                document.querySelectorAll('.decrease').forEach(btn => {
+                    btn.addEventListener('click', e => {
+                        const i = e.target.getAttribute('data-index');
+                        if (cart[i].quantity > 1) cart[i].quantity--;
+                        else removeItem(i);
+                        saveAndRender();
+                    });
+                });
+            }
+
+            function removeItem(index) {
+                cart.splice(index, 1);
+                saveAndRender();
+            }
+
+            function saveAndRender() {
+                localStorage.setItem('cart', JSON.stringify(cart));
+                renderCart();
+            }
+
+            renderCart();
+
+            // Finalizar compra (simulación)
+            checkoutBtn.addEventListener('click', () => {
+                alert('Gracias por tu compra 🛍️. Pronto recibirás la confirmación.');
+                localStorage.removeItem('cart');
+                renderCart();
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
